@@ -14,12 +14,12 @@ public class App {
 
         FCFS fcfs = new FCFS();
         SSTF sstf = new SSTF();
-        SCAN scan = new SCAN();
+        // SCAN scan = new SCAN();
 
 
         fcfs.runAlgo(new ArrayList<>(arr), head);
         sstf.runAlgo(new ArrayList<>(arr), head);
-        scan.runAlgo(new ArrayList<>(arr), head, diskSize, true);
+        // scan.runAlgo(new ArrayList<>(arr), head, diskSize, true);
         // scan.runAlgo(new ArrayList<>(arr), head, diskSize, true);
 
     }
