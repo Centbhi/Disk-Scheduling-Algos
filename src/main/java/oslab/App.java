@@ -1,4 +1,4 @@
-package com.oslab;
+package oslab;
 
 public class App {
     public static int arr[] = {1,2,3,4,5};
