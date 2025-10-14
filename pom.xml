@@ -33,7 +33,7 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.6.1</version>
         <configuration>
-          <mainClass>com.oslab.App</mainClass>
+          <mainClass>oslab.App</mainClass>
         </configuration>
       </plugin>
     </plugins>
