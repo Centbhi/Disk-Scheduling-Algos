@@ -14,13 +14,16 @@ public class App {
 
         FCFS fcfs = new FCFS();
         SSTF sstf = new SSTF();
-        SCAN scan = new SCAN();
+        // SCAN scan = new SCAN();
+        CSCAN cscan = new CSCAN();
 
 
         fcfs.runAlgo(new ArrayList<>(arr), head);
         sstf.runAlgo(new ArrayList<>(arr), head);
-        scan.runAlgo(new ArrayList<>(arr), head, diskSize, true);
-        scan.runAlgo(new ArrayList<>(arr), head, diskSize, false);
+        // scan.runAlgo(new ArrayList<>(arr), head, diskSize, true);
+        // scan.runAlgo(new ArrayList<>(arr), head, diskSize, false);
+        cscan.runAlgo(new ArrayList<>(arr), head, diskSize, true);
+        cscan.runAlgo(new ArrayList<>(arr), head, diskSize, false);
 
     }
 
