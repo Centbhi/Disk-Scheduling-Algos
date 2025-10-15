@@ -1,89 +1,80 @@
-// package oslab;
+package oslab;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
-// public class SCAN {
-//     void runAlgo(ArrayList<Integer> queue, int headPos, int diskSize, boolean isLeft){
-//         System.out.println("\nSCAN Algorithm: ");
-//         queue.sort(null);
-//         System.out.println("Sorted List: " + queue);
-//         int totalCost = 0;
-//         if(isLeft){ //<------
-//             System.out.print("Head Movement [LEFT]: \n\t" + headPos);
-//             int splitIndex = 0;
-//             for (int i = queue.size() - 1; i >= 0; i--) {
-//                 if(queue.get(i) <= headPos){
-//                     splitIndex = i;
-//                     break;
-//                 }
-//             }
-//             Result firstResult = parseLeft(queue, splitIndex, headPos, totalCost);
-//             totalCost = firstResult.getTotalCost();
+public class SCAN {
+    void runAlgo(ArrayList<Integer> queue, int headPos, int diskSize, boolean isLeft){
+        System.out.println("\nSCAN Algorithm: ");
+        queue.sort(null);
+        System.out.println("Sorted List: " + queue);
 
-//             totalCost += firstResult.getLastVal(); //from last val -> 0, thus cost+=lastval
-//             headPos = 0;
-//             System.out.print(" -> " + headPos);
+        int totalCost = 0;
+        Result init = new Result(totalCost, headPos);
 
-//             Result secondResult = parseRight(queue, 0, headPos, totalCost);
-//             totalCost = secondResult.getTotalCost();
+        if(isLeft){ //<------
+            System.out.print("Head Movement [LEFT]: \n\t" + headPos);
+            int splitIndex = 0;
+            for (int i = queue.size() - 1; i >= 0; i--) {
+                if(queue.get(i) <= headPos){
+                    splitIndex = i;
+                    break;
+                }
+            }
 
-//         }else{ //------>
-//             System.out.print("Head Movement [RIGHT]: \n\t" + headPos);
-//             int splitIndex = 0;
-//             for (int i = 0; i < queue.size(); i++) {
-//                 if(queue.get(i) >= headPos){
-//                     splitIndex = i;
-//                     break;
-//                 }
-//             }
-//             Result firstResult = parseRight(queue, splitIndex, headPos, totalCost);
-//             totalCost = firstResult.getTotalCost();
+            Result res1 = parseLeft(queue, splitIndex, init);
+            Result res2 = move(res1,0);
+            Result res3 = parseRight(queue, 0, res2);
+            totalCost = res3.totalCost;
 
-//             totalCost += Math.abs(diskSize-firstResult.getLastVal()); //from last val -> 0, thus cost+=lastval
-//             headPos = diskSize;
-//             System.out.print(" -> " + headPos);
+        }else{ //------>
+            System.out.print("Head Movement [RIGHT]: \n\t" + headPos);
+            int splitIndex = 0;
+            for (int i = 0; i < queue.size(); i++) {
+                if(queue.get(i) >= headPos){
+                    splitIndex = i;
+                    break;
+                }
+            }
 
-//             Result secondResult = parseLeft(queue, queue.size()-1, headPos, totalCost);
-//             totalCost = secondResult.getTotalCost();
-//         }
-//         System.out.println("\nTotal Cost: " + totalCost);
-//     }
+            Result res1 = parseRight(queue, splitIndex, init);
+            Result res2 = move(res1,diskSize);
+            Result res3 = parseLeft(queue,queue.size()-1, res2);
+            totalCost = res3.totalCost;
+        }
+        System.out.println("\nTotal Cost: " + totalCost);
+    }
 
-//     private Result parseRight(ArrayList<Integer> queue, int index, int headPos, int totalCost){ 
-//         while(index < queue.size()) {
-//             totalCost += Math.abs(queue.get(index)-headPos);
-//             headPos = queue.get(index);
-//             System.out.print(" -> " + headPos);
-//             queue.remove(index);
-//         }
-//         Result result = new Result(totalCost, headPos);
-//         return result;
-//     }
+    private Result parseRight(ArrayList<Integer> queue, int index, Result result){
+        while(index < queue.size()) {
+            result = move(result, queue.get(index));
+            queue.remove(index);
+        }
+        return result;
+    }
 
-//     private Result parseLeft(ArrayList<Integer> queue, int index, int headPos, int totalCost){ 
-//         while(index >= 0){
-//             totalCost += Math.abs(queue.get(index)-headPos);
-//             headPos = queue.get(index);
-//             System.out.print(" -> " + headPos);
-//             queue.remove(index);
-//             index--;
-//         }
-//         Result result = new Result(totalCost, headPos);
-//         return result;
-//     }
-// }
+    private Result parseLeft(ArrayList<Integer> queue, int index, Result result){
+        while(index >= 0){
+            result = move(result, queue.get(index));
+            queue.remove(index);
+            index--;
+        }
+        return result;
+    }
 
-// class Result{
-//     int totalCost;
-//     int lastVal;
-//     Result(int totalCost, int lastVal) {
-//         this.totalCost = totalCost;
-//         this.lastVal = lastVal;
-//     }
-//     public int getLastVal() {
-//         return lastVal;
-//     }
-//     public int getTotalCost() {
-//         return totalCost;
-//     }
-// }
+    private Result move(Result result, int dest){
+        result.totalCost += Math.abs(dest-result.currHead);
+        result.currHead = dest;
+        System.out.print(" -> " + result.currHead);
+        return result;
+    }
+
+    private class Result{
+        int totalCost;
+        int currHead;
+        Result(int totalCost, int currHead) {
+            this.totalCost = totalCost;
+            this.currHead = currHead;
+        }
+    }
+}
+
