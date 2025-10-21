@@ -3,8 +3,8 @@ package oslab;
 import java.util.ArrayList;
 
 public class SCAN {
-    void runAlgo(ArrayList<Integer> queue, int headPos, int diskSize, boolean isLeft){
-        System.out.println("\nSCAN Algorithm: ");
+    static void runAlgo(ArrayList<Integer> queue, int headPos, int diskSize, boolean isLeft){
+        System.out.println("\nSCAN Algorithm ");
         queue.sort(null);
         System.out.println("Sorted List: " + queue);
 
@@ -44,7 +44,7 @@ public class SCAN {
         System.out.println("\nTotal Cost: " + totalCost);
     }
 
-    private Result parseRight(ArrayList<Integer> queue, int index, Result result){
+    static Result parseRight(ArrayList<Integer> queue, int index, Result result){
         while(index < queue.size()) {
             result = move(result, queue.get(index));
             queue.remove(index);
@@ -52,7 +52,7 @@ public class SCAN {
         return result;
     }
 
-    private Result parseLeft(ArrayList<Integer> queue, int index, Result result){
+    static Result parseLeft(ArrayList<Integer> queue, int index, Result result){
         while(index >= 0){
             result = move(result, queue.get(index));
             queue.remove(index);
@@ -61,14 +61,14 @@ public class SCAN {
         return result;
     }
 
-    private Result move(Result result, int dest){
+    static Result move(Result result, int dest){
         result.totalCost += Math.abs(dest-result.currHead);
         result.currHead = dest;
         System.out.print(" -> " + result.currHead);
         return result;
     }
 
-    private class Result{
+    private static class Result{
         int totalCost;
         int currHead;
         Result(int totalCost, int currHead) {
