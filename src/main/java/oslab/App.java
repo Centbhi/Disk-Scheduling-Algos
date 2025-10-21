@@ -13,16 +13,21 @@ public class App {
         System.out.println("Input Array: " + arr);
         System.out.println("Head: " + head);
 
-        FCFS.runAlgo(new ArrayList<>(arr), head);
-        SSTF.runAlgo(new ArrayList<>(arr), head);
-        SCAN.runAlgo(new ArrayList<>(arr), head, diskSize, true);
-        SCAN.runAlgo(new ArrayList<>(arr), head, diskSize, false);
-        CSCAN.runAlgo(new ArrayList<>(arr), head, diskSize, true);
-        CSCAN.runAlgo(new ArrayList<>(arr), head, diskSize, false);
+        //MP7
+        // FCFS.runAlgo(new ArrayList<>(arr), head);
+        // SSTF.runAlgo(new ArrayList<>(arr), head);
+        // SCAN.runAlgo(new ArrayList<>(arr), head, diskSize, true);
+        // SCAN.runAlgo(new ArrayList<>(arr), head, diskSize, false);
+        // CSCAN.runAlgo(new ArrayList<>(arr), head, diskSize, true);
+        // CSCAN.runAlgo(new ArrayList<>(arr), head, diskSize, false);
 
+        //MP8
         // FSCAN.runAlgo(new ArrayList<>(arr), head, diskSize, true);
         // FSCAN.runAlgo(new ArrayList<>(arr), head, diskSize, false);
         // LIFO.runAlgo(new ArrayList<>(arr), head);
+        // RSS.runAlgo(new ArrayList<>(arr), head);
+        // CLOOK.runAlgo(new ArrayList<>(arr), head, diskSize, false);
+        // CLOOK.runAlgo(new ArrayList<>(arr), head, diskSize, true);
     }
 
 }
